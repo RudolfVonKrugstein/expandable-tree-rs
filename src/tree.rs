@@ -1,5 +1,6 @@
 use crate::navigator::Navigator;
 use crate::navigator::Neighbors;
+use crate::subtree::Subtree;
 
 #[derive(Debug)]
 pub struct FlatTree<A> {
@@ -8,38 +9,20 @@ pub struct FlatTree<A> {
 }
 
 impl<A> FlatTree<A> {
+    pub fn root(&self) -> Subtree<A> {
+        Subtree::new(
+            &self.values,
+            &self.nav,
+            0
+        )
+    }
+
     pub fn count(&self) -> usize {
         self.nav.all_neighbors().len()
     }
 
-    pub fn get(&self, index: usize) -> Option<&A> {
-        self.values.get(index)
-    }
-
-    pub fn get_index(&self) -> &Navigator {
-        &self.nav
-    }
-
     pub fn all_neighbors(&self) -> &Vec<Neighbors<usize>> {
         self.nav.all_neighbors()
-    }
-
-    pub fn children(&self, index: usize) -> Vec<&A> {
-        self.nav.children(index).iter().map(
-            |&i| self.values.get(i).unwrap()
-        ).collect()
-    }
-
-    pub fn parent(&self, index: usize) -> Option<&A> {
-        self.nav.parent(index).and_then(|i| self.values.get(i))
-    }
-
-    pub fn next_sibling(&self, index: usize) -> Option<&A> {
-        self.nav.next_sibling(index).and_then(|i| self.values.get(i))
-    }
-
-    pub fn prev_sibling(&self, index: usize) -> Option<&A> {
-        self.nav.prev_sibling(index).and_then(|i| self.values.get(i))
     }
 
     pub fn depth_first_map<B, F>(&self, f: F) -> Vec<B>
