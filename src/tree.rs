@@ -1,6 +1,6 @@
 use crate::navigator::Navigator;
 use crate::subtree::Subtree;
-use crate::values::{TreeValues, VecValues, Zip2Values, Zip3Values};
+use crate::values::{TreeValues, Zip2Values, Zip3Values};
 
 #[derive(Debug)]
 pub struct FlatTree<TV>
@@ -17,12 +17,12 @@ impl<TV: TreeValues> FlatTree<TV> {
     }
 }
 
-impl<A> FlatTree<VecValues<A>> {
+impl<A> FlatTree<Vec<A>> {
     // Destructive!
     pub fn expand<B>(self: Self, new_values: Vec<B>) -> FlatTree<Zip2Values<A, B>> {
         FlatTree {
             nav: self.nav,
-            values: self.values.zip(new_values),
+            values: Zip2Values::from_vecs(self.values, new_values),
         }
     }
 }
@@ -36,7 +36,7 @@ impl<A, B> FlatTree<Zip2Values<A, B>> {
         }
     }
 
-    pub fn un_flange(self: Self) -> (FlatTree<VecValues<A>>, Vec<B>) {
+    pub fn un_flange(self: Self) -> (FlatTree<Vec<A>>, Vec<B>) {
         let (values, output) = self.values.split();
         (
             FlatTree {

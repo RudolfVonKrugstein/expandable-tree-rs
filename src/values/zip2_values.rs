@@ -1,7 +1,8 @@
 use super::{
     borrowed_value::{BorrowedValue, ItemOf},
-    VecValues, Zip3Values,
+    Zip3Values,
 };
+
 use crate::values::TreeValues;
 
 pub struct Zip2Values<A, B> {
@@ -23,8 +24,8 @@ impl<A, B> Zip2Values<A, B> {
         Zip3Values::from_vecs(self.values, other)
     }
 
-    pub fn split(self) -> (VecValues<A>, Vec<B>) {
-        (VecValues::from_vec(self.values.0), self.values.1)
+    pub fn split(self) -> (Vec<A>, Vec<B>) {
+        (self.values.0, self.values.1)
     }
 }
 

@@ -1,5 +1,4 @@
 use crate::FlatTree;
-use crate::values::VecValues;
 
 pub struct Builder<A> {
     nav_builder: super::navigator::Builder,
@@ -45,12 +44,10 @@ impl<A> Builder<A> {
 }
 
 impl<A> Builder<A> {
-    pub fn build(self: Self) -> FlatTree<VecValues<A>>
-    {
-
+    pub fn build(self: Self) -> FlatTree<Vec<A>> {
         FlatTree {
             nav: self.nav_builder.build(),
-            values: VecValues::from_vec(self.values),
+            values: self.values,
         }
     }
 }
