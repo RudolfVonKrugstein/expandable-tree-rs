@@ -1,8 +1,8 @@
-use crate::TreeBuilder;
+use crate::Builder;
 
 #[test]
 fn test_flange() {
-    let mut builder = TreeBuilder::with_capacity(2);
+    let mut builder = Builder::with_capacity(2);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.end_element();
@@ -15,7 +15,7 @@ fn test_flange() {
 
 #[test]
 fn test_flange_twice() {
-    let mut builder = TreeBuilder::with_capacity(2);
+    let mut builder = Builder::with_capacity(2);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.end_element();
@@ -30,7 +30,7 @@ fn test_flange_twice() {
 
 #[test]
 fn test_ref_flange() {
-    let mut builder = TreeBuilder::with_capacity(2);
+    let mut builder = Builder::with_capacity(2);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.end_element();
@@ -44,7 +44,7 @@ fn test_ref_flange() {
 
 #[test]
 fn test_ref_flange_twice() {
-    let mut builder = TreeBuilder::with_capacity(2);
+    let mut builder = Builder::with_capacity(2);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.end_element();

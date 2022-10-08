@@ -1,9 +1,9 @@
-use crate::TreeBuilder;
+use crate::Builder;
 
 #[test]
 fn test_create() {
     // Use builder
-    let mut builder = TreeBuilder::with_capacity(10);
+    let mut builder = Builder::with_capacity(10);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.start_end_element(3);
@@ -25,7 +25,7 @@ fn simple_test() {
     // Setup
 
     // Insert a root and some children
-    let mut b = TreeBuilder::new();
+    let mut b = Builder::new();
     b.start_element(0);
     b.start_end_element(1);
     b.start_end_element(2);
@@ -43,7 +43,7 @@ fn simple_test() {
 #[test]
 fn multi_children_test() {
     // Insert a root and some children
-    let mut t = TreeBuilder::new();
+    let mut t = Builder::new();
     t.start_element(0);
     t.start_element(1);
     t.start_end_element(2);

@@ -1,8 +1,8 @@
-use crate::TreeBuilder;
+use crate::Builder;
 
 #[test]
 fn test_reduce() {
-    let mut builder = TreeBuilder::with_capacity(2);
+    let mut builder = Builder::with_capacity(2);
     builder.start_element(1);
     builder.start_end_element(2);
     builder.end_element();
