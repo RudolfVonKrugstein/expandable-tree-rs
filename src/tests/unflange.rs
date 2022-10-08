@@ -9,7 +9,7 @@ fn test_reduce() {
     let tree = builder.build();
 
     let values: Vec<u32> = (10..12).collect();
-    let tree_with_values = tree.expand(values);
+    let tree_with_values = tree.flange(values);
     let (tree, values) = tree_with_values.un_flange();
     assert_eq!(tree.root().value(), &1);
     assert_eq!(values[0], 10);

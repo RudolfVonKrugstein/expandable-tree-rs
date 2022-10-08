@@ -1,6 +1,7 @@
+use super::subtree::Subtree;
+use super::RefFlatTree;
 use crate::navigator::Navigator;
-use crate::subtree::Subtree;
-use crate::values::{TreeValues, Zip2Values, Zip3Values};
+use crate::values::{TreeValues, Zip2RefValues, Zip2Values, Zip3Values};
 
 #[derive(Debug)]
 pub struct FlatTree<TV>
@@ -19,10 +20,20 @@ impl<TV: TreeValues> FlatTree<TV> {
 
 impl<A> FlatTree<Vec<A>> {
     // Destructive!
-    pub fn expand<B>(self: Self, new_values: Vec<B>) -> FlatTree<Zip2Values<A, B>> {
+    pub fn flange<B>(self: Self, new_values: Vec<B>) -> FlatTree<Zip2Values<A, B>> {
         FlatTree {
             nav: self.nav,
             values: Zip2Values::from_vecs(self.values, new_values),
+        }
+    }
+
+    pub fn ref_flange<'a, B>(
+        &'a self,
+        new_values: &'a Vec<B>,
+    ) -> RefFlatTree<'a, Zip2RefValues<A, B>> {
+        RefFlatTree {
+            nav: &self.nav,
+            values: Zip2RefValues::from_vecs(&self.values, new_values),
         }
     }
 }
