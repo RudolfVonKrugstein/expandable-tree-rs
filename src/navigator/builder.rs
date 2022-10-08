@@ -31,14 +31,12 @@ impl Builder {
     // Building
     pub fn start_element(&mut self) -> usize {
         let my_index = self.cur_neighbors.len();
-        self.cur_neighbors.push(
-            Neighbors {
-                me: Some(my_index),
-                parent: self.parents_stack.last().cloned(),
-                next_sibling: None,
-                prev_sibling: self.last_sibling,
-            }
-        );
+        self.cur_neighbors.push(Neighbors {
+            me: Some(my_index),
+            parent: self.parents_stack.last().cloned(),
+            next_sibling: None,
+            prev_sibling: self.last_sibling,
+        });
         // Update last sibling
         if let Some(ls) = self.last_sibling {
             self.cur_neighbors[ls].next_sibling = Some(my_index);
@@ -47,7 +45,6 @@ impl Builder {
         self.parents_stack.push(my_index);
         self.last_sibling = None;
         my_index
-
     }
     pub fn end_element(&mut self) -> usize {
         self.last_sibling = self.parents_stack.pop();

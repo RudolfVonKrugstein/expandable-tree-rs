@@ -1,10 +1,12 @@
 mod borrowed_value;
 mod zip2_ref_values;
 mod zip2_values;
+mod zip3_ref_values;
 mod zip3_values;
 
 pub use zip2_ref_values::Zip2RefValues;
 pub use zip2_values::Zip2Values;
+pub use zip3_ref_values::Zip3RefValues;
 pub use zip3_values::Zip3Values;
 
 use self::borrowed_value::BorrowedValue;

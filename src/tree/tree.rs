@@ -23,7 +23,7 @@ impl<A> FlatTree<Vec<A>> {
     pub fn flange<B>(self: Self, new_values: Vec<B>) -> FlatTree<Zip2Values<A, B>> {
         FlatTree {
             nav: self.nav,
-            values: Zip2Values::from_vecs(self.values, new_values),
+            values: Zip2Values::from_vecs((self.values, new_values)),
         }
     }
 
@@ -33,7 +33,7 @@ impl<A> FlatTree<Vec<A>> {
     ) -> RefFlatTree<'a, Zip2RefValues<A, B>> {
         RefFlatTree {
             nav: &self.nav,
-            values: Zip2RefValues::from_vecs(&self.values, new_values),
+            values: Zip2RefValues::from_vecs((&self.values, new_values)),
         }
     }
 }

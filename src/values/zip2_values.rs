@@ -14,10 +14,8 @@ impl<A, B> Zip2Values<A, B> {
         (&self.values.0[index], &self.values.1[index])
     }
 
-    pub fn from_vecs(first: Vec<A>, second: Vec<B>) -> Zip2Values<A, B> {
-        Zip2Values {
-            values: (first, second),
-        }
+    pub fn from_vecs(values: (Vec<A>, Vec<B>)) -> Zip2Values<A, B> {
+        Zip2Values { values }
     }
 
     pub fn zip<N>(self, other: Vec<N>) -> Zip3Values<A, B, N> {

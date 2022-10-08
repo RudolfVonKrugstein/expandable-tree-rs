@@ -10,4 +10,4 @@ pub trait BorrowedValue<'a, _BoundBY = &'a Self> {
     type Item: 'a;
 }
 
-pub type ItemOf<'a,T> = <T as BorrowedValue<'a>>::Item;
+pub type ItemOf<'a, T> = <T as BorrowedValue<'a>>::Item;

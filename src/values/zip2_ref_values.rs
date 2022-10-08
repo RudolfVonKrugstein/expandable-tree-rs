@@ -1,4 +1,7 @@
-use super::borrowed_value::{BorrowedValue, ItemOf};
+use super::{
+    borrowed_value::{BorrowedValue, ItemOf},
+    Zip3RefValues,
+};
 
 use crate::values::TreeValues;
 
@@ -11,10 +14,16 @@ impl<'a, A, B> Zip2RefValues<'a, A, B> {
         (&self.values.0[index], &self.values.1[index])
     }
 
-    pub fn from_vecs(first: &'a Vec<A>, second: &'a Vec<B>) -> Zip2RefValues<'a, A, B> {
-        Zip2RefValues {
-            values: (first, second),
-        }
+    pub fn from_vecs(values: (&'a Vec<A>, &'a Vec<B>)) -> Zip2RefValues<'a, A, B> {
+        Zip2RefValues { values }
+    }
+
+    pub fn zip<N>(&'a self, other: &'a Vec<N>) -> Zip3RefValues<A, B, N> {
+        Zip3RefValues::from_vecs((self.values.0, self.values.1, other))
+    }
+
+    pub fn split(self) -> (&'a Vec<A>, &'a Vec<B>) {
+        (self.values.0, self.values.1)
     }
 }
 
