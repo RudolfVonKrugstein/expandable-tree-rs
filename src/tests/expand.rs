@@ -24,6 +24,6 @@ fn test_expand_twice() {
     let values: Vec<u32> = (10..12).collect();
     let tree_with_values = tree.expand(values);
     let values: Vec<u32> = (13..15).collect();
-    let tree_with_values = tree_with_values.expand(values);
+    let tree_with_values = tree_with_values.flange(values);
     assert_eq!(tree_with_values.root().value(), (&1, &10, &13));
 }

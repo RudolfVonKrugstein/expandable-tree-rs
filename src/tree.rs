@@ -29,10 +29,21 @@ impl<A> FlatTree<VecValues<A>> {
 
 impl<A, B> FlatTree<Zip2Values<A, B>> {
     // Destructive!
-    pub fn expand<N>(self: Self, new_values: Vec<N>) -> FlatTree<Zip3Values<A, B, N>> {
+    pub fn flange<N>(self: Self, new_values: Vec<N>) -> FlatTree<Zip3Values<A, B, N>> {
         FlatTree {
             nav: self.nav,
             values: self.values.zip(new_values),
         }
+    }
+
+    pub fn un_flange(self: Self) -> (FlatTree<VecValues<A>>, Vec<B>) {
+        let (values, output) = self.values.split();
+        (
+            FlatTree {
+                nav: self.nav,
+                values,
+            },
+            output,
+        )
     }
 }
