@@ -9,7 +9,7 @@ jobs:
   release:
     name: Release Packaging
     env:
-      PROJECT_NAME_UNDERSCORE: expandbale_tree
+      PROJECT_NAME_UNDERSCORE: flange_flat_tree
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
