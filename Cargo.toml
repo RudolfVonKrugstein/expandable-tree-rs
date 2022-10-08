@@ -1,13 +1,13 @@
 [package]
 name = "flange-flat-tree"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Nathan Hüeksen <nathan@wintercloud.de>"]
 description = "A tree that can be expanded by attaching new values to the node without mutability of the old ones"
 keywords = ["datastructure", "tree"]
-repository = "https://github.com/RudolfVonKrugstein/flange-flat-tree"
-homepage = "https://github.com/RudolfVonKrugstein/flange-flat-tree"
-documentation = "https://github.com/RudolfVonKrugstein/flange-flat-tree"
+repository = "https://github.com/RudolfVonKrugstein/flange-flat-tree-rs"
+homepage = "https://github.com/RudolfVonKrugstein/flange-flat-tree-rs"
+documentation = "https://github.com/RudolfVonKrugstein/flange-flat-tree-rs"
 readme = "README.md"
 license = "MIT"
 exclude = [".idea/", "node_modules", "yarn.lock", ".github"]
