@@ -17,7 +17,7 @@ fn test_create() {
     builder.start_end_element(10);
     builder.end_element();
     builder.end_element();
-    let tree = builder.build();
+    let _tree = builder.build();
 }
 
 #[test]
@@ -37,7 +37,7 @@ fn simple_test() {
 
     // Test
     assert_eq!(*root.value(), 0);
-    assert_eq!(root.children_values(), vec![&1,&2,&3]);
+    assert_eq!(root.children_values(), vec![&1, &2, &3]);
 }
 
 #[test]
@@ -58,17 +58,51 @@ fn multi_children_test() {
     let root = t.root();
 
     // Test
-    assert_eq!(root.children_values(), vec![&1,&5,&6,&7]);
-    assert_eq!(root.first_child().unwrap().children_values(), vec![&2,&3,&4]);
-    assert_eq!(root.first_child().unwrap().first_child().unwrap().next_sibling().unwrap().value(), &3);
-    assert_eq!(root.first_child().unwrap().children()[1].next_sibling().unwrap().value(), &4);
-    assert_eq!(root.first_child().unwrap().children()[1].prev_sibling().unwrap().value(), &2);
-    assert!(root.first_child().unwrap().children()[2].next_sibling().is_none());
-    assert!(root.first_child().unwrap().children()[0].prev_sibling().is_none());
+    assert_eq!(root.children_values(), vec![&1, &5, &6, &7]);
+    assert_eq!(
+        root.first_child().unwrap().children_values(),
+        vec![&2, &3, &4]
+    );
+    assert_eq!(
+        root.first_child()
+            .unwrap()
+            .first_child()
+            .unwrap()
+            .next_sibling()
+            .unwrap()
+            .value(),
+        &3
+    );
+    assert_eq!(
+        root.first_child().unwrap().children()[1]
+            .next_sibling()
+            .unwrap()
+            .value(),
+        &4
+    );
+    assert_eq!(
+        root.first_child().unwrap().children()[1]
+            .prev_sibling()
+            .unwrap()
+            .value(),
+        &2
+    );
+    assert!(root.first_child().unwrap().children()[2]
+        .next_sibling()
+        .is_none());
+    assert!(root.first_child().unwrap().children()[0]
+        .prev_sibling()
+        .is_none());
     assert!(root.parent().is_none());
     assert_eq!(root.children()[0].parent().unwrap().value(), &0);
     assert_eq!(root.children()[1].parent().unwrap().value(), &0);
     assert_eq!(root.children()[2].parent().unwrap().value(), &0);
     assert_eq!(root.children()[3].parent().unwrap().value(), &0);
-    assert_eq!(root.first_child().unwrap().children()[0].parent().unwrap().value(), &1);
+    assert_eq!(
+        root.first_child().unwrap().children()[0]
+            .parent()
+            .unwrap()
+            .value(),
+        &1
+    );
 }

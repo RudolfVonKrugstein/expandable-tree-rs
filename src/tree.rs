@@ -1,43 +1,38 @@
 use crate::navigator::Navigator;
-use crate::navigator::Neighbors;
 use crate::subtree::Subtree;
+use crate::values::{TreeValues, VecValues, Zip2Values, Zip3Values};
 
 #[derive(Debug)]
-pub struct FlatTree<A> {
+pub struct FlatTree<TV>
+where
+    TV: TreeValues,
+{
     pub(crate) nav: Navigator,
-    pub(crate) values: Vec<A>
+    pub(crate) values: TV,
 }
 
-impl<A> FlatTree<A> {
-    pub fn root(&self) -> Subtree<A> {
-        Subtree::new(
-            &self.values,
-            &self.nav,
-            0
-        )
+impl<TV: TreeValues> FlatTree<TV> {
+    pub fn root(&self) -> Subtree<TV> {
+        Subtree::new(&self.values, &self.nav, 0)
     }
+}
 
-    pub fn count(&self) -> usize {
-        self.nav.all_neighbors().len()
-    }
-
-    pub fn all_neighbors(&self) -> &Vec<Neighbors<usize>> {
-        self.nav.all_neighbors()
-    }
-
-    pub fn depth_first_map<B, F>(&self, f: F) -> Vec<B>
-        where
-            F: Fn(&A, Vec<(&A,&B)>) -> B,
-            B: Default {
-        let mut res = Vec::with_capacity(self.nav.all_neighbors().len());
-        for _ in 0..self.nav.all_neighbors().len() {
-            res.push(B::default());
+impl<A> FlatTree<VecValues<A>> {
+    // Destructive!
+    pub fn expand<B>(self: Self, new_values: Vec<B>) -> FlatTree<Zip2Values<A, B>> {
+        FlatTree {
+            nav: self.nav,
+            values: self.values.zip(new_values),
         }
-        self.nav.for_each_depth_first(
-            |i, cs| {
-                res[i] = f(&self.values[i], cs.iter().map(|ci| (&self.values[*ci], &res[*ci])).collect());
-            }
-        );
-        res
+    }
+}
+
+impl<A, B> FlatTree<Zip2Values<A, B>> {
+    // Destructive!
+    pub fn expand<N>(self: Self, new_values: Vec<N>) -> FlatTree<Zip3Values<A, B, N>> {
+        FlatTree {
+            nav: self.nav,
+            values: self.values.zip(new_values),
+        }
     }
 }
