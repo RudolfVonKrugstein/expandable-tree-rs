@@ -1,21 +1,21 @@
 use crate::FlatTree;
 
 pub struct Builder<A> {
-    nav_builder: super::navigator::Builder,
+    nav_builder: crate::navigator::Builder,
     values: Vec<A>,
 }
 
 impl<A> Builder<A> {
     pub fn new() -> Builder<A> {
         Builder {
-            nav_builder: super::navigator::Builder::new(),
+            nav_builder: crate::navigator::Builder::new(),
             values: Vec::new(),
         }
     }
 
     pub fn with_capacity(c: usize) -> Builder<A> {
         Builder {
-            nav_builder: super::navigator::Builder::with_capacity(c),
+            nav_builder: crate::navigator::Builder::with_capacity(c),
             values: Vec::with_capacity(c),
         }
     }
