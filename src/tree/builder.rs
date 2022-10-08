@@ -1,5 +1,26 @@
 use crate::FlatTree;
+/**
 
+# Example:
+
+```
+use flange_flat_tree::Builder;
+
+let mut b = Builder::new();
+b.start_element("root");
+b.start_end_element("first_child");
+b.start_element("second_child_with_children");
+b.start_end_element("deep_child");
+b.end_element();
+b.end_element();
+
+let tree = b.build();
+
+assert_eq!(tree.root().value(), &"root");
+assert_eq!(tree.root().children()[0].value(), &"first_child");
+assert_eq!(tree.root().children()[1].children()[0].value(), &"deep_child");
+```
+*/
 pub struct Builder<A> {
     nav_builder: crate::navigator::Builder,
     values: Vec<A>,

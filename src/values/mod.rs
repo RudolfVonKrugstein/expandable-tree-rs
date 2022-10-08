@@ -1,3 +1,6 @@
+//! This module exposes container for holding values
+//! that can be used inside a FlatTree.
+
 mod borrowed_value;
 mod zip2_ref_values;
 mod zip2_values;
@@ -18,14 +21,7 @@ pub trait TreeValues: for<'any> BorrowedValue<'any> {
     fn get(&self, index: usize) -> ItemOf<'_, Self>;
 }
 
-/** RefTreeValues is a trait describing contianers holding _borrowed_
-* value for a tree (A RefFlatTree)
-*/
-// pub trait RefTreeValues {
-//     type Item;
-//     fn get(&self, index: usize) -> &Self::Item;
-// }
-
+// Implementation for `Vec`
 impl<'a, A> BorrowedValue<'a> for Vec<A> {
     type Item = &'a A;
 }
