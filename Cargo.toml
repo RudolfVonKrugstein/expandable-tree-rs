@@ -1,6 +1,6 @@
 [package]
 name = "flange-flat-tree"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Nathan Hüeksen <nathan@wintercloud.de>"]
 description = "A tree that can be expanded by attaching new values to the node without mutability of the old ones"
