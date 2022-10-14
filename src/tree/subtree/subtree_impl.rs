@@ -10,10 +10,9 @@ where
     pos: usize,
 }
 
-impl<'a, TD, Node> SubtreeImpl<'a, TD>
+impl<'a, TD> SubtreeImpl<'a, TD>
 where
-    Node: 'a,
-    &'a TD: TreeData<Node = &'a Node>,
+    &'a TD: TreeData,
 {
     pub fn new(data: &'a TD, pos: usize) -> Self {
         SubtreeImpl { data, pos }
@@ -37,21 +36,17 @@ where
         }
         res
     }
-
-    pub fn value(&self) -> &'a Node {
-        self.data.get(self.pos)
-    }
 }
 
 impl<'a, TD, Node> Subtree for SubtreeImpl<'a, TD>
 where
     Node: 'a,
-    &'a TD: TreeData<Node = &'a Node>,
+    &'a TD: TreeData<Node = Node>,
 {
-    type Node = &'a Node;
+    type Node = Node;
 
-    fn value(&self) -> Self::Node {
-        self.value()
+    fn value(&self) -> Node {
+        self.data.get(self.pos)
     }
     fn parent(&self) -> Option<Self> {
         self.data
