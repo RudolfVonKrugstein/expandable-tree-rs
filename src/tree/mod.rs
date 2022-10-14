@@ -1,9 +1,10 @@
 mod builder;
-mod ref_tree;
 mod subtree;
-mod tree;
+mod tree_data;
+mod tree_trait;
+mod vec_tree;
 
 pub use builder::Builder;
-pub use ref_tree::RefFlatTree;
 pub use subtree::Subtree;
-pub use tree::FlatTree;
+pub use tree_trait::Tree;
+pub use vec_tree::VecTree;

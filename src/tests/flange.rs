@@ -1,4 +1,4 @@
-use crate::Builder;
+use crate::{tree::Tree, Builder};
 
 #[test]
 fn test_flange() {

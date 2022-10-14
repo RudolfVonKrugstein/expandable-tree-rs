@@ -1,4 +1,4 @@
-use crate::Builder;
+use crate::{tree::Tree, Builder, Subtree};
 
 #[test]
 fn test_create() {
@@ -37,7 +37,7 @@ fn simple_test() {
 
     // Test
     assert_eq!(*root.value(), 0);
-    assert_eq!(root.children_values(), vec![&1, &2, &3]);
+    assert_eq!(root.child_values(), vec![&1, &2, &3]);
 }
 
 #[test]
@@ -58,11 +58,8 @@ fn multi_children_test() {
     let root = t.root();
 
     // Test
-    assert_eq!(root.children_values(), vec![&1, &5, &6, &7]);
-    assert_eq!(
-        root.first_child().unwrap().children_values(),
-        vec![&2, &3, &4]
-    );
+    assert_eq!(root.child_values(), vec![&1, &5, &6, &7]);
+    assert_eq!(root.first_child().unwrap().child_values(), vec![&2, &3, &4]);
     assert_eq!(
         root.first_child()
             .unwrap()

@@ -49,12 +49,19 @@ impl Builder {
         self.cur_neighbors.push(Neighbors {
             me: Some(my_index),
             parent: self.parents_stack.last().cloned(),
+            first_child: None,
             next_sibling: None,
             prev_sibling: self.last_sibling,
         });
         // Update last sibling
         if let Some(ls) = self.last_sibling {
             self.cur_neighbors[ls].next_sibling = Some(my_index);
+        }
+        // Update parent
+        if let Some(&parent_index) = self.parents_stack.last() {
+            if self.cur_neighbors[parent_index].first_child.is_none() {
+                self.cur_neighbors[parent_index].first_child = Some(my_index);
+            }
         }
         // Update state
         self.parents_stack.push(my_index);
@@ -81,6 +88,7 @@ impl Builder {
         let my_index = self.cur_neighbors.len();
         self.cur_neighbors.push(Neighbors {
             me: Some(my_index),
+            first_child: None,
             parent: self.parents_stack.last().cloned(),
             next_sibling: None,
             prev_sibling: self.last_sibling,
@@ -88,6 +96,12 @@ impl Builder {
         // Update last sibling
         if let Some(ls) = self.last_sibling {
             self.cur_neighbors[ls].next_sibling = Some(my_index);
+        }
+        // Update parent
+        if let Some(&parent_index) = self.parents_stack.last() {
+            if self.cur_neighbors[parent_index].first_child.is_none() {
+                self.cur_neighbors[parent_index].first_child = Some(my_index);
+            }
         }
         // Update state
         self.last_sibling = Some(my_index);

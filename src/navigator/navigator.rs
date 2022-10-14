@@ -29,6 +29,20 @@ impl Navigator {
             .for_each(|i| f(i, self.children(i)))
     }
 
+    /** Returns the neighbors structure for a node.
+     *
+     * # Arguments
+     *
+     * - index - The index to find the neighbors of.
+     *
+     * # Result
+     *
+     * The neighbors of the nodes (in a Neighbors<usize> structure).
+     */
+    pub fn get_neighbors(&self, index: usize) -> &Neighbors<usize> {
+        &self.neighbors[index]
+    }
+
     /** Return the index of the parent (if any).
      *
      * # Arguments

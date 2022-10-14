@@ -14,6 +14,8 @@ pub struct Neighbors<A> {
     pub me: Option<A>,
     // The node above us
     pub parent: Option<A>,
+    // The first of out child nodes
+    pub first_child: Option<A>,
     // The prev node on the same level
     pub next_sibling: Option<A>,
     // The next node on the same level
@@ -40,6 +42,7 @@ impl<A> Neighbors<A> {
         Neighbors {
             me: self.me.as_ref().map(&f),
             parent: self.parent.as_ref().map(&f),
+            first_child: self.first_child.as_ref().map(&f),
             next_sibling: self.next_sibling.as_ref().map(&f),
             prev_sibling: self.prev_sibling.as_ref().map(&f),
         }
@@ -54,6 +57,7 @@ impl<A> Neighbors<A> {
     {
         Neighbors {
             me: self.me.as_ref().and_then(&f),
+            first_child: self.first_child.as_ref().and_then(&f),
             parent: self.parent.as_ref().and_then(&f),
             next_sibling: self.next_sibling.as_ref().and_then(&f),
             prev_sibling: self.prev_sibling.as_ref().and_then(&f),
@@ -69,6 +73,7 @@ impl<A> Neighbors<&A> {
     {
         Neighbors {
             me: self.me.cloned(),
+            first_child: self.first_child.cloned(),
             parent: self.parent.cloned(),
             next_sibling: self.next_sibling.cloned(),
             prev_sibling: self.prev_sibling.cloned(),

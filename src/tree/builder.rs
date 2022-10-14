@@ -1,10 +1,12 @@
-use crate::FlatTree;
+use crate::VecTree;
 /**
 
 # Example:
 
 ```
 use flange_flat_tree::Builder;
+use flange_flat_tree::Tree;
+use flange_flat_tree::Subtree;
 
 let mut b = Builder::new();
 b.start_element("root");
@@ -65,8 +67,8 @@ impl<A> Builder<A> {
 }
 
 impl<A> Builder<A> {
-    pub fn build(self: Self) -> FlatTree<Vec<A>> {
-        FlatTree {
+    pub fn build(self) -> VecTree<A> {
+        VecTree {
             nav: self.nav_builder.build(),
             values: self.values,
         }
