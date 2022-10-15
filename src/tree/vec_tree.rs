@@ -1,7 +1,7 @@
 use crate::navigator::Navigator;
 
 use super::subtree::subtree_impl::SubtreeImpl;
-use super::{super::navigator::Neighbors, tree_data::TreeData, Tree};
+use super::{tree_data::TreeData, Tree};
 
 pub struct VecTree<A> {
     pub nav: Navigator,
@@ -15,8 +15,12 @@ impl<'a, A> TreeData for &'a VecTree<A> {
         &self.values[index]
     }
 
-    fn get_neighbors(&self, index: usize) -> &Neighbors<usize> {
-        self.nav.get_neighbors(index)
+    fn node_count(self) -> usize {
+        self.values.len()
+    }
+
+    fn get_nav(&self) -> &Navigator {
+        &self.nav
     }
 }
 

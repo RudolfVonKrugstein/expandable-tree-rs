@@ -27,12 +27,12 @@ where
 
     fn children_indexes(&self) -> Vec<usize> {
         let mut res = Vec::new();
-        let mut oc = self.data.get_neighbors(self.pos).first_child;
+        let mut oc = self.data.get_nav().first_child(self.pos);
         while let Some(c) = oc {
             // Store the child
             res.push(c);
             // Advance to the next child
-            oc = self.data.get_neighbors(c).next_sibling;
+            oc = self.data.get_nav().next_sibling(c);
         }
         res
     }
@@ -48,10 +48,7 @@ where
         self.data.get(self.pos)
     }
     fn parent(&self) -> Option<Self> {
-        self.data
-            .get_neighbors(self.pos)
-            .parent
-            .map(|i| self.moved(i))
+        self.data.get_nav().parent(self.pos).map(|i| self.moved(i))
     }
     fn children(&self) -> Vec<Self> {
         self.children_indexes()
@@ -67,20 +64,20 @@ where
     }
     fn first_child(&self) -> Option<Self> {
         self.data
-            .get_neighbors(self.pos)
-            .first_child
+            .get_nav()
+            .first_child(self.pos)
             .map(|i| self.moved(i))
     }
     fn prev_sibling(&self) -> Option<Self> {
         self.data
-            .get_neighbors(self.pos)
-            .prev_sibling
+            .get_nav()
+            .prev_sibling(self.pos)
             .map(|i| self.moved(i))
     }
     fn next_sibling(&self) -> Option<Self> {
         self.data
-            .get_neighbors(self.pos)
-            .next_sibling
+            .get_nav()
+            .next_sibling(self.pos)
             .map(|i| self.moved(i))
     }
 }

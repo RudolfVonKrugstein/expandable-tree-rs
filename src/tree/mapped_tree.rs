@@ -1,5 +1,8 @@
 use super::subtree::subtree_impl::SubtreeImpl;
-use crate::{navigator::Neighbors, Tree};
+use crate::{
+    navigator::{Navigator},
+    Tree,
+};
 
 use super::tree_data::TreeData;
 
@@ -33,8 +36,12 @@ where
         (self.mapf)(index, self.base.get(index))
     }
 
-    fn get_neighbors(&self, index: usize) -> &Neighbors<usize> {
-        self.base.get_neighbors(index)
+    fn node_count(self) -> usize {
+        self.base.node_count()
+    }
+
+    fn get_nav(&self) -> &Navigator {
+        self.base.get_nav()
     }
 }
 
