@@ -11,7 +11,7 @@ where
     data: Vec<A>,
 }
 
-impl<'a, TD, A> FlangedTree<TD, A>
+impl<TD, A> FlangedTree<TD, A>
 where
     TD: TreeData,
 {
@@ -30,8 +30,8 @@ where
         (self.base.get(index), &self.data[index])
     }
 
-    fn node_count(self) -> usize {
-        self.base.node_count()
+    fn count(self) -> usize {
+        self.base.count()
     }
 
     fn get_nav(&self) -> &Navigator {

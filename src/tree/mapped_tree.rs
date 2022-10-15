@@ -33,8 +33,8 @@ where
         (self.mapf)(index, self.base.get(index))
     }
 
-    fn node_count(self) -> usize {
-        self.base.node_count()
+    fn count(self) -> usize {
+        self.base.count()
     }
 
     fn get_nav(&self) -> &Navigator {

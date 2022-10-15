@@ -15,7 +15,7 @@ impl<'a, A> TreeData for &'a VecTree<A> {
         &self.values[index]
     }
 
-    fn node_count(self) -> usize {
+    fn count(self) -> usize {
         self.values.len()
     }
 

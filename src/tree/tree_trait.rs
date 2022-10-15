@@ -18,7 +18,7 @@ where
     }
 
     fn node_count(&'a self) -> usize {
-        self.node_count()
+        self.count()
     }
 
     fn map<B, M>(&'a self, m: M) -> MappedTree<Self::Node, B, M, &'a Self>
