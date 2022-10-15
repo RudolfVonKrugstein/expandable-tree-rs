@@ -26,7 +26,7 @@ where
 {
     type Node = (Node, &'a A);
 
-    fn get(&self, index: usize) -> Self::Node {
+    fn get(self, index: usize) -> Self::Node {
         (self.base.get(index), &self.data[index])
     }
 

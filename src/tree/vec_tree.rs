@@ -11,7 +11,7 @@ pub struct VecTree<A> {
 impl<'a, A> TreeData for &'a VecTree<A> {
     type Node = &'a A;
 
-    fn get(&self, index: usize) -> Self::Node {
+    fn get(self, index: usize) -> Self::Node {
         &self.values[index]
     }
 

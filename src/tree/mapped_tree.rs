@@ -29,7 +29,7 @@ where
 {
     type Node = B;
 
-    fn get(&self, index: usize) -> Self::Node {
+    fn get(self, index: usize) -> Self::Node {
         (self.mapf)(index, self.base.get(index))
     }
 
