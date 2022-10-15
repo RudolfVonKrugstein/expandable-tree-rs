@@ -21,7 +21,7 @@ impl<'a, A> TreeData for &'a VecTree<A> {
 }
 
 impl<A> Tree for VecTree<A> {
-    fn root<'a>(&'a self) -> SubtreeImpl<'a, VecTree<A>>
+    fn root<'a>(&'a self) -> SubtreeImpl<&'a VecTree<A>>
     where
         &'a Self: TreeData,
     {

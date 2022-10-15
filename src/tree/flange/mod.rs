@@ -39,7 +39,7 @@ impl<'a, TD, A> Tree for FlangedTree<'a, TD, A>
 where
     TD: TreeData,
 {
-    fn root<'b>(&'b self) -> SubtreeImpl<'b, FlangedTree<'a, TD, A>>
+    fn root<'b>(&'b self) -> SubtreeImpl<&'b FlangedTree<'a, TD, A>>
     where
         &'b Self: TreeData,
     {

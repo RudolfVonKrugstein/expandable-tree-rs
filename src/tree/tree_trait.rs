@@ -2,7 +2,7 @@ use super::subtree::subtree_impl::SubtreeImpl;
 use super::tree_data::TreeData;
 
 pub trait Tree: Sized {
-    fn root<'a>(&'a self) -> SubtreeImpl<'a, Self>
+    fn root<'a>(&'a self) -> SubtreeImpl<&'a Self>
     where
         &'a Self: TreeData;
 }

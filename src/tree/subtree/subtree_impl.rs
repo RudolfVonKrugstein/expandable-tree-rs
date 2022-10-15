@@ -2,19 +2,19 @@ use super::Subtree;
 
 use super::super::tree_data::TreeData;
 
-pub struct SubtreeImpl<'a, TD>
+pub struct SubtreeImpl<TD>
 where
-    &'a TD: TreeData,
+    TD: TreeData,
 {
-    data: &'a TD,
+    data: TD,
     pos: usize,
 }
 
-impl<'a, TD> SubtreeImpl<'a, TD>
+impl<'a, TD> SubtreeImpl<TD>
 where
-    &'a TD: TreeData,
+    TD: TreeData,
 {
-    pub fn new(data: &'a TD, pos: usize) -> Self {
+    pub fn new(data: TD, pos: usize) -> Self {
         SubtreeImpl { data, pos }
     }
 
@@ -38,14 +38,13 @@ where
     }
 }
 
-impl<'a, TD, Node> Subtree for SubtreeImpl<'a, TD>
+impl<TD> Subtree for SubtreeImpl<TD>
 where
-    Node: 'a,
-    &'a TD: TreeData<Node = Node>,
+    TD: TreeData,
 {
-    type Node = Node;
+    type Node = TD::Node;
 
-    fn value(&self) -> Node {
+    fn value(&self) -> TD::Node {
         self.data.get(self.pos)
     }
     fn parent(&self) -> Option<Self> {

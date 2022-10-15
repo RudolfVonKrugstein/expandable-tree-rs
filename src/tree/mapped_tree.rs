@@ -43,7 +43,7 @@ where
     M: Fn(usize, A) -> B,
     TD: TreeData<Node = A>,
 {
-    fn root<'a>(&'a self) -> SubtreeImpl<'a, MappedTree<A, B, M, TD>>
+    fn root<'a>(&'a self) -> SubtreeImpl<&'a MappedTree<A, B, M, TD>>
     where
         B: 'a,
         &'a Self: TreeData,
