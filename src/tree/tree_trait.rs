@@ -32,6 +32,15 @@ where
         FlangedTree::new(self, data)
     }
 
+    fn for_each<F>(&'a self, mut f: F)
+    where
+        F: FnMut(Self::SubtreeType),
+    {
+        for i in 0..self.count() {
+            f(self.at_pos(i))
+        }
+    }
+
     fn depth_first_flange<B, F>(&'a self, mapf: F) -> FlangedTree<&'a Self, B>
     where
         B: 'a,

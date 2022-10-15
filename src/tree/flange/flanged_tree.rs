@@ -1,7 +1,7 @@
 use crate::navigator::Navigator;
 use crate::tree::subtree::subtree_impl::SubtreeImpl;
 use crate::tree::tree_data::TreeData;
-use crate::Tree;
+use crate::{Subtree, Tree};
 
 pub struct FlangedTree<TD, A>
 where
@@ -17,6 +17,19 @@ where
 {
     pub fn new(base: TD, data: Vec<A>) -> Self {
         FlangedTree { base, data }
+    }
+
+    pub fn replace_map_flange<'a, B, F>(&'a self, mapf: F) -> FlangedTree<TD, B>
+    where
+        F: Fn(<FlangedTree<TD, A> as Tree<'a>>::Node) -> B,
+    {
+        // Uninitialized vector
+        let mut res = Vec::with_capacity(self.node_count());
+
+        self.for_each(|s| {
+            res.push(mapf(s.value()));
+        });
+        FlangedTree::new(self.base, res)
     }
 }
 
