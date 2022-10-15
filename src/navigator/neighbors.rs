@@ -8,7 +8,7 @@
 * for other neighboring information, like all the neighboring
 * values of nodes.
 */
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Neighbors<A> {
     // The node itself
     pub me: Option<A>,
