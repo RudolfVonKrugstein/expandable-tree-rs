@@ -66,6 +66,12 @@ impl<A> Builder<A> {
     }
 }
 
+impl<A> Default for Builder<A> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<A> Builder<A> {
     pub fn build(self) -> VecTree<A> {
         VecTree {

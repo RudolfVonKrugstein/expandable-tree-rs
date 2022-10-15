@@ -35,14 +35,14 @@ where
     }
 }
 
-impl<'a, TD, A> Tree for FlangedTree<'a, TD, A>
+impl<'a, TD, A> Tree<'a> for FlangedTree<'a, TD, A>
 where
-    TD: TreeData,
+    TD: TreeData + 'a,
 {
-    fn root<'b>(&'b self) -> SubtreeImpl<&'b FlangedTree<'a, TD, A>>
-    where
-        &'b Self: TreeData,
-    {
+    type Node = (TD::Node, &'a A);
+    type SubtreeType = SubtreeImpl<&'a FlangedTree<'a, TD, A>>;
+
+    fn root(&'a self) -> Self::SubtreeType {
         SubtreeImpl::new(self, 0)
     }
 }

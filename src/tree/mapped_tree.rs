@@ -38,16 +38,16 @@ where
     }
 }
 
-impl<A, B, M, TD> Tree for MappedTree<A, B, M, TD>
+impl<'a, A, B, M, TD> Tree<'a> for MappedTree<A, B, M, TD>
 where
-    M: Fn(usize, A) -> B,
-    TD: TreeData<Node = A>,
+    A: 'a,
+    B: 'a,
+    M: Fn(usize, A) -> B + 'a,
+    TD: TreeData<Node = A> + 'a,
 {
-    fn root<'a>(&'a self) -> SubtreeImpl<&'a MappedTree<A, B, M, TD>>
-    where
-        B: 'a,
-        &'a Self: TreeData,
-    {
+    type Node = B;
+    type SubtreeType = SubtreeImpl<&'a Self>;
+    fn root(&'a self) -> Self::SubtreeType {
         SubtreeImpl::new(self, 0)
     }
 }

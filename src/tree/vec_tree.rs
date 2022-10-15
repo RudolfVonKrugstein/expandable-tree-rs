@@ -20,11 +20,14 @@ impl<'a, A> TreeData for &'a VecTree<A> {
     }
 }
 
-impl<A> Tree for VecTree<A> {
-    fn root<'a>(&'a self) -> SubtreeImpl<&'a VecTree<A>>
-    where
-        &'a Self: TreeData,
-    {
+impl<'a, A> Tree<'a> for VecTree<A>
+where
+    A: 'a,
+{
+    type Node = &'a A;
+    type SubtreeType = SubtreeImpl<&'a VecTree<A>>;
+
+    fn root(&'a self) -> Self::SubtreeType {
         SubtreeImpl::new(self, 0)
     }
 }

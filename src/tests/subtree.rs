@@ -1,7 +1,4 @@
-use crate::{
-    tree::{MappedTree, Subtree},
-    Builder, Tree,
-};
+use crate::{tree::Subtree, Builder, Tree};
 
 #[derive(Debug, PartialEq)]
 struct MultValNode<'a> {
@@ -25,7 +22,7 @@ fn test_subtree() {
     }
 
     let values: Vec<u32> = (10..12).collect();
-    let tree_with_values = MappedTree::new(&tree, |i, n| MultValNode {
+    let tree_with_values = tree.map(|i, n| MultValNode {
         v1: n,
         v2: &values[i],
     });
