@@ -1,4 +1,4 @@
-use crate::navigator::{Navigator};
+use crate::navigator::Navigator;
 use crate::tree::subtree::subtree_impl::SubtreeImpl;
 use crate::tree::tree_data::TreeData;
 use crate::Tree;
@@ -47,7 +47,7 @@ where
     type Node = (TD::Node, &'a A);
     type SubtreeType = SubtreeImpl<&'a FlangedTree<TD, A>>;
 
-    fn root(&'a self) -> Self::SubtreeType {
-        SubtreeImpl::new(self, 0)
+    fn at_pos(&'a self, index: usize) -> Self::SubtreeType {
+        SubtreeImpl::new(self, index)
     }
 }

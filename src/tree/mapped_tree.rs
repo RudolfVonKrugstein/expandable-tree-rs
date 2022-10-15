@@ -1,8 +1,5 @@
 use super::subtree::subtree_impl::SubtreeImpl;
-use crate::{
-    navigator::{Navigator},
-    Tree,
-};
+use crate::{navigator::Navigator, Tree};
 
 use super::tree_data::TreeData;
 
@@ -54,8 +51,8 @@ where
 {
     type Node = B;
     type SubtreeType = SubtreeImpl<&'a Self>;
-    fn root(&'a self) -> Self::SubtreeType {
-        SubtreeImpl::new(self, 0)
+    fn at_pos(&'a self, index: usize) -> Self::SubtreeType {
+        SubtreeImpl::new(self, index)
     }
 }
 

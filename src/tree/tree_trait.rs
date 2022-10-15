@@ -11,7 +11,15 @@ where
     type Node;
     type SubtreeType: Subtree<Node = Self::Node>;
 
-    fn root(&'a self) -> Self::SubtreeType;
+    fn at_pos(&'a self, index: usize) -> Self::SubtreeType;
+
+    fn root(&'a self) -> Self::SubtreeType {
+        self.at_pos(0)
+    }
+
+    fn node_count(&'a self) -> usize {
+        self.node_count()
+    }
 
     fn map<B, M>(&'a self, m: M) -> MappedTree<Self::Node, B, M, &'a Self>
     where

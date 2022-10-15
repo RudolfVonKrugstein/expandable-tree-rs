@@ -31,7 +31,7 @@ where
     type Node = &'a A;
     type SubtreeType = SubtreeImpl<&'a VecTree<A>>;
 
-    fn root(&'a self) -> Self::SubtreeType {
-        SubtreeImpl::new(self, 0)
+    fn at_pos(&'a self, index: usize) -> Self::SubtreeType {
+        SubtreeImpl::new(self, index)
     }
 }

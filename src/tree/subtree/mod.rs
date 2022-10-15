@@ -3,6 +3,7 @@ pub mod subtree_impl;
 pub trait Subtree: Sized {
     type Node;
 
+    fn get_pos(&self) -> usize;
     fn value(&self) -> Self::Node;
     fn parent(&self) -> Option<Self>;
     fn children(&self) -> Vec<Self>;

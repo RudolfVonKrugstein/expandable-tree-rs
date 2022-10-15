@@ -1,6 +1,7 @@
 mod navigator;
 mod tree;
 
+pub use navigator::Neighbors;
 pub use tree::Builder;
 pub use tree::FlangedTree;
 pub use tree::Subtree;

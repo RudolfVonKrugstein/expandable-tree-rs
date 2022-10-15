@@ -44,6 +44,10 @@ where
 {
     type Node = TD::Node;
 
+    fn get_pos(&self) -> usize {
+        self.pos
+    }
+
     fn value(&self) -> TD::Node {
         self.data.get(self.pos)
     }
