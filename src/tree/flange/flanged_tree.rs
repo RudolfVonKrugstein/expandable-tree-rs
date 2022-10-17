@@ -31,6 +31,14 @@ where
         });
         FlangedTree::new(self.base, res)
     }
+
+    pub fn get_flange(&self, index: usize) -> &A {
+        &self.data[index]
+    }
+
+    pub fn get_flange_mut(&mut self, index: usize) -> &mut A {
+        &mut self.data[index]
+    }
 }
 
 impl<'a, TD, Node, A> TreeData for &'a FlangedTree<TD, A>
@@ -63,4 +71,5 @@ where
     fn at_pos(&'a self, index: usize) -> Self::SubtreeType {
         SubtreeImpl::new(self, index)
     }
+    fn get_nav(&self) -> &Navigator {self.base.get_nav()}
 }

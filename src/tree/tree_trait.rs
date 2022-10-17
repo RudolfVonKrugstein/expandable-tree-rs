@@ -1,4 +1,5 @@
 use crate::{FlangedTree, Subtree};
+use crate::navigator::Navigator;
 
 use super::tree_data::TreeData;
 use super::MappedTree;
@@ -12,6 +13,8 @@ where
     type SubtreeType: Subtree<Node = Self::Node>;
 
     fn at_pos(&'a self, index: usize) -> Self::SubtreeType;
+
+    fn get_nav(&self) -> &Navigator;
 
     fn root(&'a self) -> Self::SubtreeType {
         self.at_pos(0)
@@ -44,14 +47,12 @@ where
     fn depth_first_flange<B, F>(&'a self, mapf: F) -> FlangedTree<&'a Self, B>
     where
         B: 'a,
+        B: Default,
+        B: Clone,
         F: Fn(Self::Node, Vec<&B>) -> B,
     {
         // Uninitialized vector
-        let mut res = Vec::with_capacity(self.node_count());
-        #[allow(clippy::uninit_vec)]
-        unsafe {
-            res.set_len(self.node_count())
-        };
+        let mut res = vec![B::default(); self.node_count()];
 
         self.get_nav().for_each_depth_first(|i, childs| {
             let new_val = mapf(self.get(i), childs.iter().map(|&c| &res[c]).collect());

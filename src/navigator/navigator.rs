@@ -26,7 +26,9 @@ impl Navigator {
     {
         (0..self.neighbors.len())
             .rev()
-            .for_each(|i| f(i, self.children(i)))
+            .for_each(|i|
+                f(i, self.children(i))
+            )
     }
 
     /** Returns the neighbors structure for a node.
