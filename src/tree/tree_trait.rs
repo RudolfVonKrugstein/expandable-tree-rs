@@ -1,5 +1,5 @@
-use crate::{FlangedTree, Subtree};
 use crate::navigator::Navigator;
+use crate::{FlangedTree, Subtree};
 
 use super::tree_data::TreeData;
 use super::MappedTree;

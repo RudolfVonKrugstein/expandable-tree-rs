@@ -71,5 +71,7 @@ where
     fn at_pos(&'a self, index: usize) -> Self::SubtreeType {
         SubtreeImpl::new(self, index)
     }
-    fn get_nav(&self) -> &Navigator {self.base.get_nav()}
+    fn get_nav(&self) -> &Navigator {
+        self.base.get_nav()
+    }
 }

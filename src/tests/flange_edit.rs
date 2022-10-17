@@ -1,4 +1,3 @@
-
 use crate::{tree::Tree, Builder, Subtree};
 
 #[test]
@@ -22,9 +21,11 @@ fn test_flange_complex_edit() {
     builder.start_end_element("two".to_string());
     builder.end_element();
     let tree = builder.build();
-    let mut tree_with_values = tree.depth_first_flange(|value, children| {
-        format!("{}flanged", value)
-    });
+    let mut tree_with_values =
+        tree.depth_first_flange(|value, children| format!("{}flanged", value));
     *tree_with_values.get_flange_mut(0) = "1flanged".to_string();
-    assert_eq!(tree_with_values.root().value(), (&"one".to_string(), &"1flanged".to_string()));
+    assert_eq!(
+        tree_with_values.root().value(),
+        (&"one".to_string(), &"1flanged".to_string())
+    );
 }

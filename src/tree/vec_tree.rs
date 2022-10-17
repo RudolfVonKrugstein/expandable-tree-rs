@@ -36,6 +36,6 @@ where
     }
 
     fn get_nav(&self) -> &Navigator {
-       &self.nav
+        &self.nav
     }
 }
