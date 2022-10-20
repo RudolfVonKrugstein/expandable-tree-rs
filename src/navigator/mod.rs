@@ -11,10 +11,10 @@ that is changed.
 */
 
 mod builder;
-mod navigator;
+mod navigator_impl;
 mod neighbors;
 
 // We use the navigator and builder only in this crate!
 pub use builder::Builder;
-pub use navigator::Navigator;
+pub use navigator_impl::Navigator;
 pub use neighbors::Neighbors;

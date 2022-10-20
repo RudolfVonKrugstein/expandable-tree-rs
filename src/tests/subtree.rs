@@ -14,7 +14,7 @@ fn test_subtree() {
     builder.end_element();
     let tree = builder.build();
 
-    fn print_subtree<'a, ST>(st: ST)
+    fn print_subtree<ST>(st: ST)
     where
         ST: Subtree<Node = u32>,
     {

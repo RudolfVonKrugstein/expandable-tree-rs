@@ -84,7 +84,7 @@ impl<A> Neighbors<&A> {
 impl Neighbors<usize> {
     /** Do `map_end_then` but don't use a mapping function but
      * take the values directly form an vec.*/
-    pub fn map_and_then_with_values<'a, B>(&self, v: &'a Vec<Option<B>>) -> Neighbors<&'a B> {
+    pub fn map_and_then_with_values<'a, B>(&self, v: &'a [Option<B>]) -> Neighbors<&'a B> {
         self.map_and_then(|i| v.get(*i).and_then(|v| v.as_ref()))
     }
 }

@@ -1,4 +1,4 @@
-use super::navigator::Navigator;
+use super::navigator_impl::Navigator;
 use super::neighbors::Neighbors;
 
 /** Create a FlatTree using simple commands

@@ -10,7 +10,7 @@ where
     pos: usize,
 }
 
-impl<'a, TD> SubtreeImpl<TD>
+impl<TD> SubtreeImpl<TD>
 where
     TD: TreeData,
 {
