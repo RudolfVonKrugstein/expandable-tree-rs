@@ -1,3 +1,10 @@
+/*! The vec tree is the basic data structure
+for a tree.
+It stores it values in a vector.
+
+When you use a `Builder` you reate a `VecTree`.
+*/
+
 use crate::navigator::Navigator;
 
 use super::subtree::subtree_impl::SubtreeImpl;
