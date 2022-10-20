@@ -35,6 +35,22 @@ where
         FlangedTree::new(self, data)
     }
 
+    fn flange_map<B,F>(&'a self, mapf: F) -> FlangedTree<&'a Self, B>
+    where
+        B: 'a,
+        B: Clone,
+        F: Fn(Self::Node) -> B {
+        let mut res = Vec::with_capacity(self.node_count());
+
+        for index in 0..self.count() {
+            let new_val = mapf(self.get(index));
+            res.push(
+                new_val
+            );
+        }
+        FlangedTree::new(self, res)
+    }
+
     fn for_each<F>(&'a self, mut f: F)
     where
         F: FnMut(Self::SubtreeType),
