@@ -22,7 +22,7 @@ fn test_flange_complex_edit() {
     builder.end_element();
     let tree = builder.build();
     let mut tree_with_values =
-        tree.depth_first_flange(|value, children| format!("{}flanged", value));
+        tree.depth_first_flange(|value, _children| format!("{}flanged", value));
     *tree_with_values.get_flange_mut(0) = "1flanged".to_string();
     assert_eq!(
         tree_with_values.root().value(),

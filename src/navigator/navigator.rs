@@ -2,11 +2,29 @@ use super::neighbors::Neighbors;
 
 #[derive(Debug)]
 /** The navigator stores the structure of the tree.
- *
- * It knows which nodes are neighbors, parents and children
- * of a node and allows navigating to them.
- * With "navigation" we mean that the index in the flat Vector storing all the nodes
- * is returned.
+It knows which nodes are neighbors, parents and children
+of a node and allows navigating to them.
+With "navigation" we mean that the index in the flat Vector storing all the nodes
+is returned.
+
+# Example:
+
+```
+use flange_flat_tree::navigator::Builder;
+
+// A navigator just stores neigbors, so we provide no values
+let mut b = Builder::default();
+let root = b.start_element();
+let child1 = b.start_end_element();
+let child2 = b.start_end_element();
+
+let nav = b.build();
+
+assert_eq!(nav.children(root), [child1,child2]);
+assert_eq!(nav.next_sibling(child1), Some(child2));
+assert_eq!(nav.prev_sibling(child2), Some(child1));
+```
+
 */
 pub struct Navigator {
     neighbors: Vec<Neighbors<usize>>,
@@ -20,6 +38,32 @@ impl Navigator {
         Navigator { neighbors }
     }
 
+    /** Iterates through all nodes in a depth-first order.
+    That means the children of a node are garuanteed to be
+    visited before the node itself.
+
+    # Example
+    ```
+    use flange_flat_tree::navigator::Builder;
+
+    // A navigator just stores neigbors, so we provide no values
+    let mut b = Builder::default();
+    let root = b.start_element();
+    let child1 = b.start_end_element();
+    let child2 = b.start_end_element();
+    // ...
+
+    let nav = b.build();
+    let mut visited = vec![false;3];
+
+     nav.for_each_depth_first(|i, childs| {
+         visited[i] = true;
+         for c in childs {
+             assert!(visited[c]);
+         }
+     });
+    ```
+    */
     pub fn for_each_depth_first<F>(&self, mut f: F)
     where
         F: FnMut(usize, Vec<usize>),
