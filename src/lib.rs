@@ -155,7 +155,7 @@ assert_eq!(tree_with_values.root().value().value, 1);
 ```
 */
 
-mod navigator;
+pub mod navigator;
 mod tree;
 
 pub use navigator::Neighbors;

@@ -31,7 +31,7 @@ pub struct Builder<A> {
 impl<A> Builder<A> {
     pub fn new() -> Builder<A> {
         Builder {
-            nav_builder: crate::navigator::Builder::new(),
+            nav_builder: crate::navigator::Builder::default(),
             values: Vec::new(),
         }
     }

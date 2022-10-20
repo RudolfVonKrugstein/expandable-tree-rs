@@ -2,8 +2,22 @@ use super::navigator::Navigator;
 use super::neighbors::Neighbors;
 
 /** Create a FlatTree using simple commands
- *
- * A flat tree itself is imutable, so we use the builder pattern.
+A flat tree itself is immutable, so we use the builder pattern.
+## Example
+
+```
+use flange_flat_tree::navigator::Builder;
+
+// A navigator just stores neigbors, so we provide no values
+let mut b = Builder::default();
+let root = b.start_element();
+let child = b.start_end_element();
+
+let nav = b.build();
+
+assert_eq!(nav.children(root), [child]);
+assert_eq!(nav.parent(child), Some(root));
+```
  */
 pub struct Builder {
     // current_depth: usize,
@@ -18,9 +32,9 @@ pub struct Builder {
     cur_neighbors: Vec<Neighbors<usize>>,
 }
 
-impl Builder {
+impl Default for Builder {
     /// Create a new builder
-    pub fn new() -> Builder {
+    fn default() -> Builder {
         Builder {
             cur_neighbors: Vec::new(),
             // current_depth: 0,
@@ -28,8 +42,10 @@ impl Builder {
             last_sibling: None,
         }
     }
+}
 
-    /// Create a new builder and pre-allocate memeory.
+impl Builder {
+    /// Create a new builder and pre-allocate memory
     pub fn with_capacity(c: usize) -> Builder {
         Builder {
             cur_neighbors: Vec::with_capacity(c),
